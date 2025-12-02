@@ -14,7 +14,6 @@ struct Student {
 char currentRole[10];
 char currentUser[50];
 
-/* Function prototypes */
 int  loginSystem(void);
 void mainMenu(void);
 void adminMenu(void);
@@ -36,7 +35,6 @@ int main(void) {
     return 0;
 }
 
-/* ------------- LOGIN SYSTEM ------------- */
 int loginSystem(void) {
     char username[20], password[20];
     char fileUser[20], filePass[20], fileRole[10];
@@ -60,15 +58,13 @@ int loginSystem(void) {
             strcpy(currentRole, fileRole);
             strcpy(currentUser, fileUser);
             fclose(fp);
-            return 1;      // success
+            return 1;      
         }
     }
 
     fclose(fp);
-    return 0;              // login failed
+    return 0;              
 }
-
-/* ------------- MAIN MENU ------------- */
 void mainMenu(void) {
     if (strcmp(currentRole, "ADMIN") == 0)
         adminMenu();
@@ -78,7 +74,6 @@ void mainMenu(void) {
         guestMenu();
 }
 
-/* ------------- ADMIN MENU ------------- */
 void adminMenu(void) {
     int choice;
     do {
@@ -104,7 +99,6 @@ void adminMenu(void) {
     } while (choice != 6);
 }
 
-/* Simple placeholders so code compiles */
 void staffMenu(void) {
     printf("\n[STAFF MENU] (not implemented yet)\n");
 }
@@ -112,7 +106,6 @@ void guestMenu(void) {
     printf("\n[GUEST MENU] (not implemented yet)\n");
 }
 
-/* ------------- ADD STUDENT ------------- */
 void addStudent(void) {
     FILE *fp = fopen(STUDENT_FILE, "a");
     struct Student st;
@@ -134,7 +127,6 @@ void addStudent(void) {
     printf("Student Added Successfully!\n");
 }
 
-/* ------------- DISPLAY STUDENTS ------------- */
 void displayStudents(void) {
     FILE *fp = fopen(STUDENT_FILE, "r");
     struct Student st;
@@ -154,7 +146,6 @@ void displayStudents(void) {
     fclose(fp);
 }
 
-/* ------------- SEARCH STUDENT ------------- */
 void searchStudent(void) {
     FILE *fp = fopen(STUDENT_FILE, "r");
     struct Student st;
@@ -184,7 +175,6 @@ void searchStudent(void) {
     fclose(fp);
 }
 
-/* ------------- UPDATE STUDENT (simple version) ------------- */
 void updateStudent(void) {
     FILE *fp = fopen(STUDENT_FILE, "r");
     FILE *temp = fopen("temp.txt", "w");
@@ -224,7 +214,6 @@ void updateStudent(void) {
         printf("Record not found.\n");
 }
 
-/* ------------- DELETE STUDENT ------------- */
 void deleteStudent(void) {
     FILE *fp = fopen(STUDENT_FILE, "r");
     FILE *temp = fopen("temp.txt", "w");
@@ -244,7 +233,7 @@ void deleteStudent(void) {
     while (fscanf(fp, "%d %49s %f", &st.roll, st.name, &st.marks) == 3) {
         if (st.roll == roll) {
             found = 1;
-            continue;   // skip this record
+            continue;   
         }
         fprintf(temp, "%d %s %.2f\n", st.roll, st.name, st.marks);
     }
